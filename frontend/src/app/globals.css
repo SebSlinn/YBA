@@ -1,8 +1,15 @@
+/*frontend/src/app/globals.css*/
+@import "../styles/colours.css";
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+    --yba-navy: #2F3559;
+  --yba-magenta: #D5008F;
+  --yba-gold: #F6B32E;
+  --yba-teal: #18B8C9;
+  --yba-white: #FFFFFF;
 }
 
 @theme inline {

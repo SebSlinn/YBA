@@ -1,0 +1,18 @@
+/*frontend/src/styles/colours.css*/
+:root {
+  --yba-navy: #2F3559;
+  --yba-navy-rgb: 47, 53, 89;
+
+  --yba-magenta: #D5008F;
+  --yba-magenta-rgb: 213, 0, 143;
+
+  --yba-gold: #F6B32E;
+  --yba-gold-rgb: 246, 179, 46;
+
+  --yba-teal: #18B8C9;
+  --yba-teal-rgb: 24, 184, 201;
+
+  --page-bg: var(--yba-navy);
+  --text-light: #ffffff;
+  --text-dark: #1b1b1b;
+}
