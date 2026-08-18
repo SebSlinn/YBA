@@ -13,11 +13,9 @@ export default async function EventsSection() {
 
   return (
 
-    <section>
+    <section className="bg-white py-16 sm:py-24">
 
-      ...
-
-      <div className="relative mx-auto ...">
+      <div className="relative mx-auto max-w-[var(--content-width,1400px)] px-[var(--page-padding,48px)]">
 
         <h2
           className="text-2xl font-bold sm:text-3xl"
@@ -45,4 +43,3 @@ export default async function EventsSection() {
 
   );
 }
-

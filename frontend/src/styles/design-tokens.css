@@ -2,15 +2,6 @@
 
 :root {
 
-  /* Brand Colours */
-
-  --colour-navy: #2F3559;
-  --colour-magenta: #D5008F;
-  --colour-gold: #F6B32E;
-  --colour-teal: #18B8C9;
-
-  --colour-white: #ffffff;
-
   /* Header */
 
   --header-height: 64px;
@@ -42,4 +33,3 @@
   --transition-speed: .35s;
 
 }
-
