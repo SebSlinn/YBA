@@ -74,7 +74,7 @@ export default function Hero() {
           screen size (not just desktop). Top offset is tied to the header's
           own height plus a fixed gap, so it's always comfortably clear of the
           header regardless of screen size — not "too high" on a small screen.
-          Sized in steps (mobile → tablet → desktop) rather than one big jump. */}
+          Sized in steps (mobile → tablet → desktop) rather than one big jump. 
       <div className="absolute z-10 top-[calc(var(--header-height,64px)+16px)] left-6 h-20 w-20 sm:left-8 sm:h-28 sm:w-28 md:left-[var(--page-padding,48px)] md:h-56 md:w-56 lg:h-[var(--hero-logo-width,340px)] lg:w-[var(--hero-logo-width,340px)]">
         <Image
           src="/images/logos/YBA_LOGO_TRANS.png"
@@ -84,7 +84,7 @@ export default function Hero() {
           className="object-contain object-left-top drop-shadow-lg"
         />
       </div>
-
+*/}
       {/* Heading — one unified treatment at every screen size (this used to
           switch to a different, independently-centered desktop layout, which
           is exactly what caused it to drift out of sync with the small-screen
