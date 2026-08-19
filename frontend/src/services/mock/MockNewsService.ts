@@ -47,12 +47,15 @@ Mandy Townsend and Tracey Thompson are being recognised for their outstanding co
     category: "Events",
     pinned: false,
     featured: false,
-    externalReferences: [
-      {
-        title: "Read the newspaper article",
-        url: "https://www.chesterzoo.org/news/winners-announced-at-the-national-conservation-education-awards-2026"
-      },
-      {
+   externalReferences: [
+  {
+    id: "1",
+    title: "Read the newspaper article",
+    url: "https://www.chesterzoo.org/news/winners-announced-at-the-national-conservation-award",
+  },
+
+      {   
+    id: "2",
         title: "National Conservation Education Awards",
         url: "https://www.chesterzoo.org/news/winners-announced-at-the-national-conservation-education-awards-2026"
       }
