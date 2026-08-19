@@ -1,35 +1,14 @@
 /* Design Tokens */
-
 :root {
-
-  /* Header */
-
-  --header-height: 64px;
-
-  /* Hero */
-
+  --header-height: 82px;
   --hero-height: 92vh;
-
   --hero-logo-width: 340px;
-
   --hero-logo-top: 96px;
-
   --hero-title-size: 4rem;
-
   --hero-content-width: 560px;
-
   --hero-content-top: 470px;
-
   --hero-bottom-strip: 16px;
-
-  /* Layout */
-
   --content-width: 1400px;
-
   --page-padding: 48px;
-
-  /* Animation */
-
   --transition-speed: .35s;
-
 }

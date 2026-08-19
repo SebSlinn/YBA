@@ -5,39 +5,24 @@ import { DirectusEvent } from "../directus/types/DirectusEvent";
 import { getAssetUrl } from "../directus/client/DirectusClient";
 
 export class DirectusEventMapper {
-
-  static toEvent(
-    item: DirectusEvent
-  ): Event {
-
+  static toEvent(item: DirectusEvent): Event {
     return {
-
       id: item.id.toString(),
-
       title: item.title,
-
       slug: item.slug,
-
       summary: item.summary,
-
       content: item.content,
-
-      featuredImage: getAssetUrl(item.featured_image),
-
+      featuredImage: getAssetUrl(item.featured_image, {
+        width: 600,
+        height: 338, // match whatever EventCard actually ends up using
+        fit: "cover",
+      }),
       startDate: new Date(item.start_date),
-
-      endDate: item.end_date
-    ? new Date(item.end_date)
-    : undefined,
-
+      endDate: item.end_date ? new Date(item.end_date) : undefined,
       location: item.location,
-
       category: item.category,
-
       featured: item.featured ?? false,
-
-      status: item.status, 
-
+      status: item.status,
     };
   }
 }
