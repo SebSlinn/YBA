@@ -12,3 +12,10 @@
   --page-padding: 48px;
   --transition-speed: .35s;
 }
+
+/* design-tokens.css — add this */
+@media (max-width: 640px) {
+  :root {
+    --hero-height: 52dvh;
+  }
+}

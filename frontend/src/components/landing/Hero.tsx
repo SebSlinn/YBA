@@ -34,7 +34,7 @@ export default function Hero() {
   return (
     <section
       style={{ height: "var(--hero-height, 92vh)" }}
-      className="relative min-h-[600px] w-full overflow-hidden"
+     className="relative min-h-[380px] sm:min-h-[500px] lg:min-h-[600px] w-full overflow-hidden"
     >
 
       {/* Background — crossfading slides, all stacked, only the active one opaque */}
@@ -90,7 +90,7 @@ export default function Hero() {
           is exactly what caused it to drift out of sync with the small-screen
           version). Centered horizontally, pushed to the bottom of the hero
           via justify-end, the same way on a phone, a tablet, or a 4K monitor. */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-end px-6 pb-20 text-center">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-end px-6 pb-10 sm:pb-14 md:pb-20 text-center">
         <div className="relative w-full" style={{ minHeight: "clamp(4.5rem,15vw,9rem)" }}>
 
           {/* Rotating headline — slides up into place while fading in, and
