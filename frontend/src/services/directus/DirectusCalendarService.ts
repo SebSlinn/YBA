@@ -20,7 +20,7 @@ export class DirectusCalendarService implements ICalendarService {
   constructor(private eventService: IEventService) {}
 
   async getEvents(options?: CalendarQueryOptions): Promise<CalendarEvent[]> {
-    const events = await this.eventService.getLatest({
+    const events = await this.eventService.getUpcoming({
       limit: options?.limit,
     });
 
