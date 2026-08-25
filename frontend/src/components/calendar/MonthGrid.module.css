@@ -1,0 +1,105 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  padding: 0 4px 4px;
+}
+
+.weekdayLabel {
+  font-family: var(--cal-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cal-ink-soft);
+  text-align: left;
+  padding: 4px 6px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 92px;
+  padding: 8px;
+  background: var(--cal-surface);
+  border: 1px solid var(--cal-line);
+  border-radius: var(--cal-radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.cell:hover {
+  border-color: var(--cal-slate);
+}
+
+.selected {
+  border-color: var(--cal-ink);
+  box-shadow: 0 0 0 1px var(--cal-ink);
+}
+
+.outsideMonth {
+  opacity: 0.4;
+}
+
+.weekend {
+  background: var(--cal-paper);
+}
+
+.dayNumber {
+  font-family: var(--cal-font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cal-ink);
+}
+
+.todayNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cal-marigold);
+  color: var(--cal-surface);
+}
+
+.chips {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+
+.chip {
+  font-size: 11px;
+  line-height: 1.3;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.moreChip {
+  font-family: var(--cal-font-mono);
+  font-size: 10px;
+  color: var(--cal-ink-soft);
+  padding: 0 6px;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    gap: 3px;
+  }
+  .cell {
+    min-height: 64px;
+    padding: 5px;
+  }
+  .chip {
+    font-size: 10px;
+  }
+}

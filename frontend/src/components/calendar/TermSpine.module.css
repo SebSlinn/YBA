@@ -1,0 +1,90 @@
+.spine {
+  padding: 30px 12px 44px;
+}
+
+.track {
+  position: relative;
+  height: 3px;
+  background: var(--cal-line);
+  border-radius: 2px;
+  margin: 0 8px;
+}
+
+.termBlock {
+  position: absolute;
+  top: -1px;
+  height: 5px;
+  border-radius: 3px;
+  opacity: 0.9;
+}
+
+.termLabel {
+  position: absolute;
+  top: 14px;
+  left: 2px;
+  font-family: var(--cal-font-display);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tick {
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 9px;
+  background: var(--cal-line);
+}
+
+.tickLabel {
+  position: absolute;
+  top: -22px;
+  left: -12px;
+  width: 24px;
+  font-family: var(--cal-font-mono);
+  font-size: 11px;
+  color: var(--cal-ink-soft);
+  text-align: center;
+}
+
+.todayPin {
+  position: absolute;
+  top: -9px;
+  width: 2px;
+  height: 21px;
+  background: var(--cal-marigold);
+}
+
+.todayPin::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cal-marigold);
+  box-shadow: 0 0 0 4px var(--cal-marigold-soft);
+}
+
+.todayLabel {
+  position: absolute;
+  top: 16px;
+  left: -14px;
+  font-family: var(--cal-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cal-marigold);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .termLabel {
+    font-size: 11px;
+  }
+  .tickLabel {
+    display: none;
+  }
+}

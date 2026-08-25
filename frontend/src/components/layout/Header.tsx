@@ -38,9 +38,7 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 const UTILITY_LINKS = [
-  { label: "News", href: "/news" },
-  { label: "Events", href: "/events" },
-  { label: "Contact", href: "/#contact" },
+
 ];
 
 export default function Header() {
@@ -157,7 +155,7 @@ export default function Header() {
             </div>;
           })}
         </nav>
-        <div className="border-t border-black/10 bg-[var(--yba-navy,#2F3559)] px-6 py-5 text-white sm:px-8"><div className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold uppercase tracking-[.1em]"><Link href="/news" onClick={closeMenu} className="hover:text-[var(--yba-gold,#F6B32E)]">News</Link><Link href="/events" onClick={closeMenu} className="hover:text-[var(--yba-gold,#F6B32E)]">Events</Link><Link href="/#contact" onClick={closeMenu} className="hover:text-[var(--yba-gold,#F6B32E)]">Contact</Link></div></div>
+        <div className="border-t border-black/10 bg-[var(--yba-navy,#2F3559)] px-6 py-5 text-white sm:px-8"><div className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold uppercase tracking-[.1em]"><Link href="/calendar" onClick={closeMenu} className="hover:text-[var(--yba-gold,#F6B32E)]">Calendar</Link><Link href="/#contact" onClick={closeMenu} className="hover:text-[var(--yba-gold,#F6B32E)]">Contact</Link></div></div>
       </aside>
     </>
   );

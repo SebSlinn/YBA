@@ -1,0 +1,130 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 4px 8px 16px;
+}
+
+.headerLeft,
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.monthNav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.monthTitle {
+  font-family: var(--cal-font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cal-ink);
+  min-width: 190px;
+  margin: 0;
+}
+
+.navButton {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--cal-line);
+  background: var(--cal-surface);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--cal-ink);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.navButton:hover {
+  border-color: var(--cal-ink);
+  background: var(--cal-paper);
+}
+
+.todayButton {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--cal-line);
+  background: var(--cal-surface);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cal-ink);
+  cursor: pointer;
+  transition: border-color 120ms ease;
+}
+
+.todayButton:hover {
+  border-color: var(--cal-ink);
+}
+
+.viewToggle {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--cal-surface);
+  border: 1px solid var(--cal-line);
+}
+
+.viewButton {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cal-ink-soft);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.viewButton[data-active='true'] {
+  background: var(--cal-ink);
+  color: var(--cal-surface);
+}
+
+.filterRow {
+  padding: 0 8px 16px;
+}
+
+.body {
+  padding: 0 4px;
+}
+
+.dayPanel {
+  margin: 16px 4px 4px;
+  padding: 4px 4px 8px;
+  border-top: 1px solid var(--cal-line);
+}
+
+.dayPanelTitle {
+  font-family: var(--cal-font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cal-ink);
+  margin: 16px 8px 4px;
+}
+
+.dayPanelEmpty {
+  padding: 8px 12px 20px;
+  font-size: 13px;
+  color: var(--cal-ink-soft);
+}
+
+@media (max-width: 640px) {
+  .header {
+    align-items: flex-start;
+  }
+  .monthTitle {
+    font-size: 18px;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,66 @@
+/**
+ * Design tokens for the school calendar, scoped under .calendarScope.
+ *
+ * Deliberately self-contained: 04-known-issues notes there's no shared
+ * design-system layer yet, so rather than guessing at site-wide tokens
+ * that don't exist, this component brings its own — consistent with how
+ * every component currently styles itself. When a real token system
+ * lands, these can be swapped for the shared ones without touching the
+ * component markup.
+ *
+ * Fonts (Fraunces for display, IBM Plex Sans for body, IBM Plex Mono for
+ * dates/numerals) are expected to be loaded via next/font/google at the
+ * app level — see app/(site)/calendar/page.tsx for the import. This file
+ * only references the resulting CSS variables/family names; it doesn't
+ * load the fonts itself.
+ */
+
+.calendarScope {
+  --cal-ink: #1b2a44;
+  --cal-ink-soft: #4a5568;
+  --cal-paper: #eef0f4;
+  --cal-surface: #ffffff;
+  --cal-line: #d7dbe2;
+
+  --cal-marigold: #e8a33d;
+  --cal-marigold-soft: #f6dfb8;
+  --cal-sage: #6b8f71;
+  --cal-sage-soft: #dbe6dc;
+  --cal-brick: #b5533c;
+  --cal-brick-soft: #f0d7cf;
+  --cal-slate: #5c7089;
+  --cal-slate-soft: #dde3ea;
+
+  /* Falls back to the literal family names if the page hasn't loaded them
+     via next/font (see app-calendar-page/page.tsx for the recommended
+     next/font/google setup) — so this still renders sensibly either way. */
+  --cal-font-display: var(--font-cal-display, 'Fraunces'), Georgia, serif;
+  --cal-font-body: var(--font-cal-body, 'IBM Plex Sans'), system-ui, sans-serif;
+  --cal-font-mono: var(--font-cal-mono, 'IBM Plex Mono'), ui-monospace, monospace;
+
+  --cal-radius: 10px;
+  --cal-radius-sm: 6px;
+  --cal-shadow: 0 1px 2px rgba(27, 42, 68, 0.06), 0 8px 24px rgba(27, 42, 68, 0.05);
+
+  background: var(--cal-paper);
+  color: var(--cal-ink);
+  font-family: var(--cal-font-body);
+  border-radius: var(--cal-radius);
+}
+
+.calendarScope :where(button) {
+  font-family: inherit;
+}
+
+.calendarScope :where(button):focus-visible,
+.calendarScope :where([tabindex]):focus-visible {
+  outline: 2px solid var(--cal-ink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendarScope * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

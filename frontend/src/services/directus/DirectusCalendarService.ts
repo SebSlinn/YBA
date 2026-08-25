@@ -9,12 +9,6 @@ import { IEventService } from '../interfaces/IEventService';
  * shape, so it can sit alongside ICS/Office365 sources in a
  * CompositeCalendarService without duplicating any Directus-calling code.
  *
- * NOTE: adjust the method call below (`getUpcoming` / `getLatest` / etc.)
- * to whatever IEventService actually exposes — this file assumes it has
- * something equivalent to News's getLatest(options), but Event's real
- * interface may differ slightly (e.g. a date-range filter instead of a
- * limit). Wire it to whatever's really there rather than adding a new
- * method to IEventService unless one is genuinely missing.
  */
 export class DirectusCalendarService implements ICalendarService {
   constructor(private eventService: IEventService) {}
