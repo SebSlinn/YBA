@@ -38,7 +38,7 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 const UTILITY_LINKS = [
-
+ { label: "Contact Us", href: "/#contact" },
 ];
 
 export default function Header() {
