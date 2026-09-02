@@ -1,4 +1,4 @@
-import { readItems } from "@directus/sdk";
+import { readItems, withToken } from "@directus/sdk";
 import { directus } from "./client/DirectusClient";
 import { DirectusPage } from "./types/DirectusPage";
 import { DirectusPageMapper } from "../mappers/DirectusPageMapper";
@@ -8,27 +8,25 @@ import { Page } from "@/domain/page/Page";
 export class DirectusPageService implements IPageService {
 
   async getBySlug(
-    slug: string
+    slug: string,
+    previewToken?: string
   ): Promise<Page | null> {
 
-    const items = await directus.request(
-
-      readItems("pages", {
-
-        filter: {
-          slug: {
-            _eq: slug,
+    const query = {
+      filter: previewToken
+        ? { slug: { _eq: slug } }
+        : {
+            slug: { _eq: slug },
+            status: { _eq: "published" },
           },
-          status: {
-            _eq: "published",
-          },
-        },
+      limit: 1,
+    };
 
-        limit: 1,
-
-      })
-
-    );
+    const items = previewToken
+      ? await directus.request(
+          withToken(previewToken, readItems("pages", query))
+        )
+      : await directus.request(readItems("pages", query));
 
     const pages = items as DirectusPage[];
 
