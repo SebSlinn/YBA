@@ -27,9 +27,10 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "http://198.244.232.142:3000"
     depends_on:
       - database
-   frontend:
+  frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
