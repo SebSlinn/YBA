@@ -21,7 +21,7 @@ interface RichTextProps {
 export function RichText({ html, className }: RichTextProps) {
   const clean = DOMPurify.sanitize(html, {
     ALLOWED_TAGS: [
-      "p", "br", "strong", "em", "u", "s",
+      "p", "br", "strong", "em", "u", "s", "span",
       "h1", "h2", "h3", "h4", "h5", "h6",
       "ul", "ol", "li",
       "a", "img",
