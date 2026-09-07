@@ -9,7 +9,7 @@ type MenuItem = { label: string; href?: string; children?: { label: string; href
 const MENU_ITEMS: MenuItem[] = [
   { label: "About Us", children: [
     { label: "Our School", href: "/#about" },
-    { label: "Headteacher's Welcome", href: "/#headteachers-welcome" },
+    { label: "Headteacher's Welcome", href: "/headteachers-welcome" },
     { label: "Our Values", href: "/#values" },
     { label: "Key Information", href: "/#about" },
     { label: "Contact Us", href: "/#contact" },
