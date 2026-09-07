@@ -18,8 +18,8 @@ export default function EventCard({ event }: EventCardProps) {
         <Image
           src={event.featuredImage}
           alt={event.title}
-          width={640}
-          height={224}
+          width={600}
+          height={338}
           className="h-56 w-full object-cover object-top transition group-hover:scale-105"
         />
       )}
