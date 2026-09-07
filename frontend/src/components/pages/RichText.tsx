@@ -1,3 +1,4 @@
+//src/components/pages/RichText.tsx
 import DOMPurify from "isomorphic-dompurify";
 
 interface RichTextProps {
@@ -19,9 +20,6 @@ interface RichTextProps {
  */
 export function RichText({ html, className }: RichTextProps) {
   const clean = DOMPurify.sanitize(html, {
-    // Adjust as needed once real content is authored — this default set
-    // covers what Directus's WYSIWYG toolbar produces (headings, lists,
-    // links, inline images, basic formatting).
     ALLOWED_TAGS: [
       "p", "br", "strong", "em", "u", "s",
       "h1", "h2", "h3", "h4", "h5", "h6",
@@ -30,13 +28,6 @@ export function RichText({ html, className }: RichTextProps) {
       "blockquote", "code", "pre",
       "table", "thead", "tbody", "tr", "th", "td",
     ],
-    // "style" and "class" are included because Directus's WYSIWYG image
-    // toolbar applies float/alignment via one of these two (exactly which
-    // depends on your Directus version — see the note below). This content
-    // is only ever authored by trusted staff through the Directus admin,
-    // not submitted by the public, so allowing style here is a reasonable
-    // trade-off — DOMPurify still sanitizes the CSS value itself (no
-    // expression()/url(javascript:) etc. gets through).
     ALLOWED_ATTR: ["href", "src", "alt", "title", "target", "rel", "style", "class"],
   });
 
@@ -57,11 +48,11 @@ export function RichText({ html, className }: RichTextProps) {
     [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4
     [&_li]:mb-1
     [&_a]:text-blue-600 [&_a]:underline [&_a:hover]:text-blue-800
-    [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-md [&_img]:mb-4
-    [&_img[style*='float:left']]:mr-6
-    [&_img[style*='float:right']]:ml-6
-    [&_.alignleft]:float-left [&_.alignleft]:mr-6 [&_.alignleft]:mb-4
-    [&_.alignright]:float-right [&_.alignright]:ml-6 [&_.alignright]:mb-4
+    [&_img]:max-w-md [&_img]:h-auto [&_img]:rounded-md [&_img]:mb-4 [&_img]:mx-auto [&_img]:block
+    [&_img[style*='float:left']]:mr-6 [&_img[style*='float:left']]:mx-0
+    [&_img[style*='float:right']]:ml-6 [&_img[style*='float:right']]:mx-0
+    [&_.alignleft]:float-left [&_.alignleft]:mr-6 [&_.alignleft]:mb-4 [&_.alignleft]:mx-0
+    [&_.alignright]:float-right [&_.alignright]:ml-6 [&_.alignright]:mb-4 [&_.alignright]:mx-0
     [&_.aligncenter]:block [&_.aligncenter]:mx-auto [&_.aligncenter]:mb-4
     [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4
     [&_table]:w-full [&_table]:border-collapse [&_table]:mb-4
@@ -78,20 +69,3 @@ export function RichText({ html, className }: RichTextProps) {
     />
   );
 }
-
-/**
- * If your Directus WYSIWYG image toolbar produces class names instead of
- * inline styles (WordPress-style: alignleft/alignright/aligncenter — worth
- * checking, since that's what ysgolbrynalyn.co.uk's current WordPress site
- * uses), add matching rules wherever this component's styles live:
- *
- *   .alignright { float: right; margin: 0 0 1rem 1.5rem; }
- *   .alignleft  { float: left;  margin: 0 1.5rem 1rem 0; }
- *   .aligncenter { display: block; margin: 0 auto 1rem; }
- *
- * If it produces inline `style="float:right"` instead, no extra CSS is
- * needed — the sanitized inline style renders as-is. Check which one your
- * install does by authoring a test image + alignment in Directus, saving,
- * then inspecting the raw `content` field value via the Directus API or
- * admin UI's "Raw value" view.
- */
