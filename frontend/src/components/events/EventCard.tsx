@@ -1,4 +1,4 @@
-//frontpage/src/components/events/EventCard.tsx
+//frontend/src/components/events/EventCard.tsx
 
 import Link from "next/link";
 import Image from "next/image";
@@ -18,9 +18,9 @@ export default function EventCard({ event }: EventCardProps) {
         <Image
           src={event.featuredImage}
           alt={event.title}
-          width={600}
-          height={450}
-          className="h-56 w-full object-cover transition group-hover:scale-105"
+          width={640}
+          height={224}
+          className="h-56 w-full object-cover object-top transition group-hover:scale-105"
         />
       )}
 
