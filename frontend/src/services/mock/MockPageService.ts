@@ -21,7 +21,7 @@ const MOCK_PAGES: Page[] = [
 ];
 
 export class MockPageService implements IPageService {
-  async getBySlug(slug: string): Promise<Page | null> {
+  async getBySlug(slug: string, previewToken?: string): Promise<Page | null> {
     const page = MOCK_PAGES.find((p) => p.slug === slug);
     return page ?? null;
   }
