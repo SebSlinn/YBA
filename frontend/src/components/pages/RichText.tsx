@@ -1,4 +1,4 @@
-//src/components/pages/RichText.tsx
+// src/components/pages/RichText.tsx
 import DOMPurify from "isomorphic-dompurify";
 
 interface RichTextProps {
@@ -7,17 +7,6 @@ interface RichTextProps {
   className?: string;
 }
 
-/**
- * Renders sanitized HTML from a Directus WYSIWYG field.
- *
- * Directus's WYSIWYG interface stores clean HTML (not RTF), but it's
- * still staff-authored content coming from an external system — sanitize
- * before it ever reaches dangerouslySetInnerHTML.
- *
- * Uses isomorphic-dompurify so this works identically during Next.js SSR
- * and in the browser (plain dompurify needs a DOM, which isn't present
- * during server rendering).
- */
 export function RichText({ html, className }: RichTextProps) {
   const clean = DOMPurify.sanitize(html, {
     ALLOWED_TAGS: [
@@ -26,19 +15,13 @@ export function RichText({ html, className }: RichTextProps) {
       "ul", "ol", "li",
       "a", "img",
       "blockquote", "code", "pre",
-      "table", "thead", "tbody", "tr", "th", "td",
+      "table", "thead", "tbody", "tr", "th", "td", "colgroup", "col",
     ],
-    ALLOWED_ATTR: ["href", "src", "alt", "title", "target", "rel", "style", "class"],
+    ALLOWED_ATTR: ["href", "src", "alt", "title", "target", "rel", "style", "class", "colspan", "rowspan"],
   });
 
-  // Tailwind's [&_selector]:class arbitrary-variant syntax lets us style
-  // tags inside this raw, sanitized HTML that we don't control the markup
-  // of (no @tailwindcss/typography plugin assumed — this works with plain
-  // Tailwind). The trailing `after:content-[''] after:table after:clear-both`
-  // is a clearfix: without it, a floated image (from Directus's alignment
-  // toolbar) can make this container collapse to zero height, since a
-  // floated element doesn't contribute to its parent's height on its own.
   const richTextStyles = `
+    max-w-[800px] mx-auto
     [&_p]:mb-4 [&_p]:leading-relaxed
     [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4
     [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3
@@ -55,9 +38,9 @@ export function RichText({ html, className }: RichTextProps) {
     [&_.alignright]:float-right [&_.alignright]:ml-6 [&_.alignright]:mb-4 [&_.alignright]:mx-0
     [&_.aligncenter]:block [&_.aligncenter]:mx-auto [&_.aligncenter]:mb-4
     [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4
-    [&_table]:w-full [&_table]:border-collapse [&_table]:mb-4
-    [&_th]:border [&_th]:border-gray-300 [&_th]:p-2 [&_th]:bg-gray-50 [&_th]:text-left
-    [&_td]:border [&_td]:border-gray-300 [&_td]:p-2
+    [&_table]:w-full [&_table]:max-w-[950px] [&_table]:mx-auto [&_table]:my-6 [&_table]:border-collapse [&_table]:table-fixed
+    [&_th]:bg-[#2F3559] [&_th]:text-white [&_th]:text-left [&_th]:p-3 [&_th]:border [&_th]:border-[#2F3559]
+    [&_td]:p-[9px] [&_td]:border [&_td]:border-[#d5d7df]
     after:content-[''] after:table after:clear-both
   `;
 
