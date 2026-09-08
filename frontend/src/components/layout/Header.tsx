@@ -10,7 +10,7 @@ const MENU_ITEMS: MenuItem[] = [
   { label: "About Us", children: [
     { label: "Our School", href: "/#about" },
     { label: "Headteacher's Welcome", href: "/headteachers-welcome" },
-    { label: "Our Values", href: "/#values" },
+    { label: "Our Values", href: "/yba-vision" },
     { label: "Key Information", href: "/#about" },
     { label: "Contact Us", href: "/#contact" },
   ]},
