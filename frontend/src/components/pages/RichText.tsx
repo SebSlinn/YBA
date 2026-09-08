@@ -20,7 +20,7 @@ export function RichText({ html, className }: RichTextProps) {
     ALLOWED_ATTR: ["href", "src", "alt", "title", "target", "rel", "style", "class", "colspan", "rowspan"],
   });
 
-  const richTextStyles = `
+const richTextStyles = `
     max-w-[800px] mx-auto
     [&_p]:mb-4 [&_p]:leading-relaxed
     [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4
@@ -31,9 +31,9 @@ export function RichText({ html, className }: RichTextProps) {
     [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4
     [&_li]:mb-1
     [&_a]:text-blue-600 [&_a]:underline [&_a:hover]:text-blue-800
-    [&_img]:max-w-md [&_img]:h-auto [&_img]:rounded-md [&_img]:mb-4 [&_img]:mx-auto [&_img]:block
-    [&_img[style*='float:left']]:mr-6 [&_img[style*='float:left']]:mx-0
-    [&_img[style*='float:right']]:ml-6 [&_img[style*='float:right']]:mx-0
+    [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-md [&_img]:mb-4 [&_img]:mx-auto [&_img]:block
+    [&_img:has(+img)]:inline-block [&_img:has(+img)]:w-[220px] [&_img:has(+img)]:m-1 [&_img:has(+img)]:align-top
+    [&_img+img]:inline-block [&_img+img]:w-[220px] [&_img+img]:m-1 [&_img+img]:align-top
     [&_.alignleft]:float-left [&_.alignleft]:mr-6 [&_.alignleft]:mb-4 [&_.alignleft]:mx-0
     [&_.alignright]:float-right [&_.alignright]:ml-6 [&_.alignright]:mb-4 [&_.alignright]:mx-0
     [&_.aligncenter]:block [&_.aligncenter]:mx-auto [&_.aligncenter]:mb-4
@@ -43,7 +43,6 @@ export function RichText({ html, className }: RichTextProps) {
     [&_td]:p-[9px] [&_td]:border [&_td]:border-[#d5d7df]
     after:content-[''] after:table after:clear-both
   `;
-
   return (
     <div
       className={`${richTextStyles} ${className ?? ""}`}
