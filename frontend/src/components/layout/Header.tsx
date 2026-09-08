@@ -15,6 +15,7 @@ const MENU_ITEMS: MenuItem[] = [
     { label: "Contact Us", href: "/#contact" },
   ]},
   { label: "Our School", children: [
+    { label: "Staff", href: "/yba-staff" },
     { label: "Students", href: "/#students" },
     { label: "Parents", href: "/#parents" },
     { label: "School Life", href: "/#students" },
