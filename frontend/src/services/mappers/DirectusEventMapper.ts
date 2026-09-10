@@ -1,5 +1,6 @@
 //frontend/src/services/mappers/DirectusEventMapper.ts
 
+
 import { Event } from "@/domain/event/Event";
 import { DirectusEvent } from "../directus/types/DirectusEvent";
 import { getAssetUrl } from "../directus/client/DirectusClient";
@@ -12,11 +13,14 @@ export class DirectusEventMapper {
       slug: item.slug,
       summary: item.summary,
       content: item.content,
-      featuredImage: getAssetUrl(item.featured_image, {
-        width: 600,
-        height: 338, // match whatever EventCard actually ends up using
-        fit: "cover",
-      }),
+      featuredImage: item.featured_image
+        ? getAssetUrl(item.featured_image.id, {
+            width: 600,
+            height: 338,
+            fit: "cover",
+            cacheBust: item.featured_image.modified_on,
+          })
+        : undefined,
       startDate: new Date(item.start_date),
       endDate: item.end_date ? new Date(item.end_date) : undefined,
       location: item.location,
