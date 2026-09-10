@@ -21,7 +21,7 @@ export function RichText({ html, className }: RichTextProps) {
   });
 
 const richTextStyles = `
-    max-w-[800px] mx-auto
+    max-w-[800px] mx-auto px-4
     [&_p]:mb-4 [&_p]:leading-relaxed
     [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4
     [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3
