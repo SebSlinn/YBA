@@ -14,15 +14,17 @@ export default function NewsArticle({
     article,
 }: NewsArticleProps) {
     return (
-        <article className="mx-auto max-w-5xl px-6 py-12">
+        <article className="mx-auto max-w-5xl px-6 pt-[82px] pb-12">
 
-            <Image
-                src={article.featuredImage}
-                alt={article.title}
-                width={1400}
-                height={800}
-                className="mb-8 w-full rounded-xl object-cover"
-            />
+            {article.featuredImage && (
+                <Image
+                    src={article.featuredImage}
+                    alt={article.title}
+                    width={1400}
+                    height={800}
+                    className="mb-8 w-full rounded-xl object-cover"
+                />
+            )}
 
             <p className="text-sm uppercase tracking-wider text-gray-500">
                 {article.category}

@@ -23,7 +23,7 @@ export default async function EventPage({
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-22">
+    <main className="mx-auto max-w-5xl px-6 pt-[82px] pb-22">
 
       <h1 className="mb-6 text-4xl font-bold">
         {event.title}

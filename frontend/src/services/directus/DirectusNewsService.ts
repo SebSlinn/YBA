@@ -7,6 +7,15 @@ import { DirectusNewsMapper } from "../mappers/DirectusNewsMapper";
 import { INewsService, NewsQueryOptions } from "../interfaces/INewsService";
 import { NewsArticle } from "@/domain/news/NewsArticle";
 
+// Requesting nested fields explicitly — without this, Directus returns
+// featured_image as just the raw file ID string, not the related file
+// object, so modified_on (needed for cache-busting) is never available.
+const NEWS_FIELDS = [
+  "*",
+  "featured_image.id",
+  "featured_image.modified_on",
+];
+
 export class DirectusNewsService implements INewsService {
 
 async getLatest(
@@ -16,6 +25,8 @@ async getLatest(
   const items = await directus.request(
 
     readItems("news", {
+
+      fields: NEWS_FIELDS,
 
       sort: ["-publish_date"],
 
@@ -44,6 +55,8 @@ async getLatest(
   const items = await directus.request(
 
     readItems("news", {
+
+      fields: NEWS_FIELDS,
 
       filter: {
         slug: {

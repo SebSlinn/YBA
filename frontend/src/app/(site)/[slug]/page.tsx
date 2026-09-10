@@ -20,7 +20,10 @@ export default async function StandardPage({ params, searchParams }: PageProps) 
   }
 
   return (
-    <main>
+    // pt-[82px] matches Header's fixed h-[82px] exactly — News/Events avoid this
+    // because their Hero component provides that clearance itself; plain content
+    // pages have no Hero, so they need it directly on the wrapper instead.
+    <main className="pt-[82px]">
       {isPreview && (
         <div style={{ background: "#D5008F", color: "white", textAlign: "center", padding: "0.5rem" }}>
           You&apos;re viewing a draft preview — this page is not live.

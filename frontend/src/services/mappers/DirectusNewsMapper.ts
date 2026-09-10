@@ -1,6 +1,5 @@
 // src/services/directus/mappers/DirectusNewsMapper.ts
 
-
 import { NewsArticle } from "@/domain/news/NewsArticle";
 import { DirectusNews } from "../directus/types/DirectusNews";
 import { getAssetUrl } from "../directus/client/DirectusClient";
@@ -23,7 +22,14 @@ export class DirectusNewsMapper {
 
       content: item.content,
 
-      featuredImage: getAssetUrl(item.featured_image),
+      featuredImage: item.featured_image
+        ? getAssetUrl(item.featured_image.id, {
+            width: 600,
+            height: 338,
+            fit: "cover",
+            cacheBust: item.featured_image.modified_on,
+          })
+        : undefined,
 
       publishedDate: item.publish_date,
 

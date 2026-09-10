@@ -14,7 +14,10 @@ export interface DirectusNews {
 
   content: string;
 
-  featured_image: string;
+  featured_image: {
+    id: string;
+    modified_on: string;
+  } | null;
 
   publish_date: string;
 

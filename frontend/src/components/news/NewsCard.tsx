@@ -21,21 +21,24 @@ export default function NewsCard({ article }: Props) {
   return (
     <article className="group overflow-hidden rounded-xl bg-white shadow-md transition hover:shadow-xl">
 
-      <Link href={`/news/${article.slug}`}>
 
-        <div className="relative h-56 w-full overflow-hidden">
+        <Link href={`/news/${article.slug}`}>
 
-          <Image
-            priority
-            src={article.featuredImage}
-            alt={article.title}
-            fill
-            className="object-cover transition duration-300 group-hover:scale-105"
-          />
+          {article.featuredImage && (
+            <div className="relative h-56 w-full overflow-hidden">
 
-        </div>
+              <Image
+                priority
+                src={article.featuredImage}
+                alt={article.title}
+                fill
+                className="object-cover transition duration-300 group-hover:scale-105"
+              />
 
-      </Link>
+            </div>
+          )}
+
+        </Link>
 
       <div className="p-6">
 

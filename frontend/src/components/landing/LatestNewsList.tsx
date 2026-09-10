@@ -45,22 +45,23 @@ export default function LatestNewsList({
               "
             >
 
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg">
+              {article.featuredImage && (
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg">
 
-                <Image
-                  src={article.featuredImage}
-                  alt={article.title}
-                  fill
-                  className="
-                    object-cover
-                    transition
-                    duration-300
-                    group-hover:scale-105
-                  "
-                />
+                  <Image
+                    src={article.featuredImage}
+                    alt={article.title}
+                    fill
+                    className="
+                      object-cover
+                      transition
+                      duration-300
+                      group-hover:scale-105
+                    "
+                  />
 
-              </div>
-
+                </div>
+              )}
 
               <div>
 

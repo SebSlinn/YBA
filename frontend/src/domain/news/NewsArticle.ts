@@ -7,7 +7,7 @@ export interface NewsArticle {
   slug: string;
   summary: string;
   content: string;
-  featuredImage: string;
+  featuredImage?: string;
   publishedDate: string;
   category: string;
   featured: boolean;
