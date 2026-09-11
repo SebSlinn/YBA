@@ -1,3 +1,5 @@
+//frontend/src/app/%28site%29/%5Bslug%5D/page.tsx
+
 import { notFound } from "next/navigation";
 import { getPageService } from "@/services/ServiceFactory";
 import { RichText } from "@/components/pages/RichText";

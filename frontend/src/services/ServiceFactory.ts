@@ -1,11 +1,9 @@
-//frontend/src/services/ServiceFactory.ts
+// frontend/src/services/ServiceFactory.ts
 //
-// This is your real file with the Hero wiring merged in — the changes are
-// the new imports (IHeroService / DirectusHeroService / MockHeroService),
-// the USE_MOCK_HERO flag (matching the USE_MOCK_PAGES pattern you already
-// have, rather than the older `useMock` local used for News/Events), and
-// getHeroService() at the bottom. Everything else is unchanged from what
-// you pasted.
+// Your real file, with menu wiring merged in the same way Hero was: a new
+// import block, a USE_MOCK_MENU flag (matching the USE_MOCK_PAGES /
+// USE_MOCK_HERO pattern), and getMenuService() at the bottom. Everything
+// else is unchanged from what you pasted.
 
 import { MockNewsService } from "./mock/MockNewsService";
 import { DirectusNewsService } from "./directus/DirectusNewsService";
@@ -28,9 +26,14 @@ import type { IHeroService } from "@/services/interfaces/IHeroService";
 import { DirectusHeroService } from "@/services/directus/DirectusHeroService";
 import { MockHeroService } from "@/services/mock/MockHeroService";
 
+import type { IMenuService } from "@/services/interfaces/IMenuService";
+import { DirectusMenuService } from "@/services/directus/DirectusMenuService";
+import { MockMenuService } from "@/services/mock/MockMenuService";
+
 // alongside your existing USE_MOCK_NEWS / USE_MOCK_EVENTS style flags
 const USE_MOCK_PAGES = process.env.NEXT_PUBLIC_USE_MOCK_PAGES === "true";
 const USE_MOCK_HERO = process.env.NEXT_PUBLIC_USE_MOCK_HERO === "true";
+const USE_MOCK_MENU = process.env.NEXT_PUBLIC_USE_MOCK_MENU === "true";
 
 export function getPageService(): IPageService {
   return USE_MOCK_PAGES ? new MockPageService() : new DirectusPageService();
@@ -38,6 +41,10 @@ export function getPageService(): IPageService {
 
 export function getHeroService(): IHeroService {
   return USE_MOCK_HERO ? new MockHeroService() : new DirectusHeroService();
+}
+
+export function getMenuService(): IMenuService {
+  return USE_MOCK_MENU ? new MockMenuService() : new DirectusMenuService();
 }
 
 const useMock = false;

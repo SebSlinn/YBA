@@ -3,47 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import type { MenuItem } from "@/domain/menu/MenuItem";
 
-type MenuItem = { label: string; href?: string; children?: { label: string; href: string }[] };
+// Small utility link in the top-right strip (desktop only) — left as-is
+// for now since it's one link and rarely changes. Happy to move this into
+// Directus too (e.g. a second `menu` value like "utility") if useful.
+const UTILITY_LINKS = [{ label: "Contact Us", href: "/#contact" }];
 
-const MENU_ITEMS: MenuItem[] = [
-  { label: "About Us", children: [
-    { label: "Our School", href: "/#about" },
-    { label: "Headteacher's Welcome", href: "/headteachers-welcome" },
-    { label: "Our Values", href: "/yba-vision" },
-    { label: "Key Information", href: "/#about" },
-    { label: "Contact Us", href: "/#contact" },
-  ]},
-  { label: "Our School", children: [
-    { label: "Staff", href: "/yba-staff" },
-    { label: "Students", href: "/#students" },
-    { label: "Parents", href: "/#parents" },
-    { label: "School Life", href: "/#students" },
-  ]},
-  { label: "Curriculum", children: [
-    { label: "Our Curriculum", href: "/#curriculum" },
-    { label: "Learning", href: "/#curriculum" },
-  ]},
-  { label: "Admissions", children: [
-    { label: "Admissions", href: "/#admissions" },
-    { label: "Visit the School", href: "/#contact" },
-  ]},
-  { label: "News & Events", children: [
-    { label: "Latest News", href: "/news" },
-    { label: "Events", href: "/events" },
-  ]},
-  { label: "Parents", children: [
-    { label: "Parent Information", href: "/#parents" },
-    { label: "Useful Information", href: "/#parents" },
-  ]},
-  { label: "Contact Us", href: "/#contact" },
-];
+type HeaderProps = {
+  items: MenuItem[];
+};
 
-const UTILITY_LINKS = [
- { label: "Contact Us", href: "/#contact" },
-];
-
-export default function Header() {
+export default function Header({ items }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>(null);
   const [hidden, setHidden] = useState(false);
@@ -142,16 +113,16 @@ export default function Header() {
         </div>
         <nav className="flex-1 overflow-y-auto" aria-label="Main navigation">
           <Link href="/" onClick={closeMenu} className="block border-b border-black/10 px-6 py-5 text-lg font-semibold transition hover:bg-black/[.035] sm:px-8">Home</Link>
-          {MENU_ITEMS.map(item => {
-            if (!item.children?.length) return <Link key={item.label} href={item.href ?? "#"} onClick={closeMenu} className="flex items-center justify-between border-b border-black/10 px-6 py-5 text-lg font-semibold transition hover:bg-black/[.035] hover:text-[var(--yba-magenta,#D5008F)] sm:px-8">{item.label}<span aria-hidden="true">→</span></Link>;
-            const expanded = openSection === item.label;
-            return <div key={item.label} className="border-b border-black/10">
-              <button type="button" aria-expanded={expanded} onClick={() => setOpenSection(expanded ? null : item.label)} className={`flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold transition sm:px-8 ${expanded ? "bg-[var(--yba-navy,#2F3559)] text-white" : "hover:bg-black/[.035] hover:text-[var(--yba-magenta,#D5008F)]"}`}>
+          {items.map(item => {
+            if (!item.children?.length) return <Link key={item.id} href={item.href ?? "#"} onClick={closeMenu} className="flex items-center justify-between border-b border-black/10 px-6 py-5 text-lg font-semibold transition hover:bg-black/[.035] hover:text-[var(--yba-magenta,#D5008F)] sm:px-8">{item.label}<span aria-hidden="true">→</span></Link>;
+            const expanded = openSection === item.id;
+            return <div key={item.id} className="border-b border-black/10">
+              <button type="button" aria-expanded={expanded} onClick={() => setOpenSection(expanded ? null : item.id)} className={`flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold transition sm:px-8 ${expanded ? "bg-[var(--yba-navy,#2F3559)] text-white" : "hover:bg-black/[.035] hover:text-[var(--yba-magenta,#D5008F)]"}`}>
                 <span>{item.label}</span><span aria-hidden="true" className={`text-xl font-normal transition-transform ${expanded ? "rotate-45" : ""}`}>+</span>
               </button>
               <div className={`grid transition-[grid-template-rows] ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`} style={{ transitionDuration: "var(--transition-speed,.35s)" }}>
                 <div className="overflow-hidden"><div className="bg-[#f7f7f7] px-6 py-2 sm:px-8">
-                  {item.children.map(child => <Link key={child.label} href={child.href} onClick={closeMenu} className="flex items-center justify-between border-b border-black/10 py-4 text-sm font-medium last:border-b-0 hover:text-[var(--yba-magenta,#D5008F)]">{child.label}<span aria-hidden="true">→</span></Link>)}
+                  {item.children.map(child => <Link key={child.id} href={child.href ?? "#"} onClick={closeMenu} className="flex items-center justify-between border-b border-black/10 py-4 text-sm font-medium last:border-b-0 hover:text-[var(--yba-magenta,#D5008F)]">{child.label}<span aria-hidden="true">→</span></Link>)}
                 </div></div>
               </div>
             </div>;
