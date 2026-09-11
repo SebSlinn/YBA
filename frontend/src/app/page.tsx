@@ -4,6 +4,12 @@
 // wrapped by app/(site)/layout.tsx, which only covers routes inside that
 // group), so it needs the same menu-fetching wiring added there. Same
 // pattern: fetch once server-side via ServiceFactory, pass as a prop.
+//
+// revalidate added: without it this route has no ISR window at all and
+// gets frozen at build time on the VPS (unlike dev, which always renders
+// fresh) — anything added in Directus after the last `docker compose up
+// -d --build frontend` silently doesn't show up here until the next
+// rebuild. Matches app/(site)/layout.tsx's revalidate = 60.
 
 import Header from "@/components/layout/Header";
 import HeroSection from "@/components/landing/HeroSection";
@@ -12,6 +18,8 @@ import QuickLinks from "@/components/landing/QuickLinks";
 import EventsSection from "@/components/landing/EventsSection";
 import Footer from "@/components/layout/Footer";
 import { getMenuService } from "@/services/ServiceFactory";
+
+export const revalidate = 60;
 
 export default async function Home() {
   const menuItems = await getMenuService().getMenu("primary");
