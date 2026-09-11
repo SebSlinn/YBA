@@ -1,35 +1,40 @@
 //src/components/landing/Hero.tsx
+//
+// Presentational + carousel state only — slides now come from Directus via
+// HeroSection.tsx (a server component, same "Section" wrapper pattern as
+// NewsSection/EventsSection) instead of being hardcoded here. Everything
+// else — overlay, gradients, logo, heading animation, scroll cue, bottom
+// strip — is unchanged from before.
+//
+// The one behavioural change beyond the data source: each image now gets
+// its own objectPosition from slide.focalPoint, set in Directus, instead of
+// every photo defaulting to a plain center crop.
 
 "use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
-// Each slide pairs a background photo with its own headline. Add/remove
-// slides here — everything below just maps over this array, so a 4th slide
-// is as simple as adding a 4th object (once the photo exists at that path).
-const SLIDES = [
-  { src: "/images/hero/hero1.jpg", alt: "Students celebrating outdoors at YBA", heading: "Discover Your Potential" },
-  { src: "/images/hero/hero2.jpg", alt: "Students learning at YBA", heading: "Dream. Reach. Achieve" },
-  { src: "/images/hero/hero3.jpg", alt: "Students on the sports field at YBA", heading: "Every Student. Every Day" },
-];
+import { HeroSlide } from "@/domain/hero/HeroSlide";
 
 const SLIDE_DURATION = 6000; // ms each slide is shown before advancing
 const FADE_DURATION = 1000; // ms crossfade — keep in sync with the transitionDuration below
 
-export default function Hero() {
+export default function Hero({ slides }: { slides: HeroSlide[] }) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    // Nothing to rotate through if there's 0 or 1 slide.
+    if (slides.length <= 1) return;
+
     // Respect prefers-reduced-motion — just show the first slide, no auto-advance
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return;
 
     const id = setInterval(() => {
-      setCurrent((i) => (i + 1) % SLIDES.length);
+      setCurrent((i) => (i + 1) % slides.length);
     }, SLIDE_DURATION);
     return () => clearInterval(id);
-  }, []);
+  }, [slides.length]);
 
   return (
     <section
@@ -38,17 +43,20 @@ export default function Hero() {
     >
 
       {/* Background — crossfading slides, all stacked, only the active one opaque */}
-      {SLIDES.map((slide, i) => (
+      {slides.map((slide, i) => (
         <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
+          key={slide.id}
+          src={slide.image}
+          alt={slide.alt ?? "Hero image"}
           fill
           priority={i === 0}
           className={`object-cover transition-opacity ease-in-out ${
             i === current ? "opacity-100" : "opacity-0"
           }`}
-          style={{ transitionDuration: `${FADE_DURATION}ms` }}
+          style={{
+            transitionDuration: `${FADE_DURATION}ms`,
+            objectPosition: `${slide.focalPoint.x}% ${slide.focalPoint.y}%`,
+          }}
         />
       ))}
 
@@ -74,7 +82,7 @@ export default function Hero() {
           screen size (not just desktop). Top offset is tied to the header's
           own height plus a fixed gap, so it's always comfortably clear of the
           header regardless of screen size — not "too high" on a small screen.
-          Sized in steps (mobile → tablet → desktop) rather than one big jump. 
+          Sized in steps (mobile → tablet → desktop) rather than one big jump.
       <div className="absolute z-10 top-[calc(var(--header-height,64px)+16px)] left-6 h-20 w-20 sm:left-8 sm:h-28 sm:w-28 md:left-[var(--page-padding,48px)] md:h-56 md:w-56 lg:h-[var(--hero-logo-width,340px)] lg:w-[var(--hero-logo-width,340px)]">
         <Image
           src="/images/logos/YBA_LOGO_TRANS.png"
@@ -101,9 +109,9 @@ export default function Hero() {
               it, rather than wrapping early just because of a fixed max-width.
               minHeight keeps the box tall enough for the longest heading at
               two lines, so a forced mobile wrap doesn't jump the layout. */}
-          {SLIDES.map((slide, i) => (
+          {slides.map((slide, i) => (
             <h1
-              key={slide.heading}
+              key={slide.id}
               className={`absolute inset-0 whitespace-normal text-center font-bold leading-tight text-white drop-shadow-lg transition-all ease-out sm:whitespace-nowrap ${
                 i === current ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
               }`}

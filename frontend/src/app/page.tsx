@@ -1,5 +1,7 @@
+//frontend/src/app/page.tsx
+
 import Header from "@/components/layout/Header";
-import Hero from "@/components/landing/Hero";
+import HeroSection from "@/components/landing/HeroSection";
 import NewsSection from "@/components/landing/NewsSection";
 import QuickLinks from "@/components/landing/QuickLinks";
 import EventsSection from "@/components/landing/EventsSection";
@@ -12,7 +14,7 @@ export default function Home() {
 
       <main>
         <section id="about">
-          <Hero />
+          <HeroSection />
         </section>
 
         <section id="students">
