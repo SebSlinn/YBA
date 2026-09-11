@@ -1,9 +1,10 @@
 // frontend/src/services/ServiceFactory.ts
 //
-// Your real file, with menu wiring merged in the same way Hero was: a new
-// import block, a USE_MOCK_MENU flag (matching the USE_MOCK_PAGES /
-// USE_MOCK_HERO pattern), and getMenuService() at the bottom. Everything
-// else is unchanged from what you pasted.
+// Your real file, with documents wiring merged in the same way Menu/Hero
+// were: a new import block, a USE_MOCK_DOCUMENTS flag (matching the
+// USE_MOCK_PAGES / USE_MOCK_HERO / USE_MOCK_MENU pattern), and
+// getDocumentService() alongside the other getXxxService() functions.
+// Everything else is unchanged from what you pasted.
 
 import { MockNewsService } from "./mock/MockNewsService";
 import { DirectusNewsService } from "./directus/DirectusNewsService";
@@ -30,10 +31,15 @@ import type { IMenuService } from "@/services/interfaces/IMenuService";
 import { DirectusMenuService } from "@/services/directus/DirectusMenuService";
 import { MockMenuService } from "@/services/mock/MockMenuService";
 
+import type { IDocumentService } from "@/services/interfaces/IDocumentService";
+import { DirectusDocumentService } from "@/services/directus/DirectusDocumentService";
+import { MockDocumentService } from "@/services/mock/MockDocumentService";
+
 // alongside your existing USE_MOCK_NEWS / USE_MOCK_EVENTS style flags
 const USE_MOCK_PAGES = process.env.NEXT_PUBLIC_USE_MOCK_PAGES === "true";
 const USE_MOCK_HERO = process.env.NEXT_PUBLIC_USE_MOCK_HERO === "true";
 const USE_MOCK_MENU = process.env.NEXT_PUBLIC_USE_MOCK_MENU === "true";
+const USE_MOCK_DOCUMENTS = process.env.NEXT_PUBLIC_USE_MOCK_DOCUMENTS === "true";
 
 export function getPageService(): IPageService {
   return USE_MOCK_PAGES ? new MockPageService() : new DirectusPageService();
@@ -45,6 +51,10 @@ export function getHeroService(): IHeroService {
 
 export function getMenuService(): IMenuService {
   return USE_MOCK_MENU ? new MockMenuService() : new DirectusMenuService();
+}
+
+export function getDocumentService(): IDocumentService {
+  return USE_MOCK_DOCUMENTS ? new MockDocumentService() : new DirectusDocumentService();
 }
 
 const useMock = false;

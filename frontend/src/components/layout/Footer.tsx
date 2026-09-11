@@ -37,7 +37,14 @@ const CONTACT_ITEMS = [
   },
 ];
 
-const POLICY_LINKS = ["Privacy Policy", "Cookie Policy", "Accessibility"];
+// Documents & Policies points at the real page; the other three are still
+// placeholders until those pages exist.
+const POLICY_LINKS = [
+  { label: "Documents & Policies", href: "/documents" },
+  { label: "Privacy Policy", href: "#" },
+  { label: "Cookie Policy", href: "#" },
+  { label: "Accessibility", href: "#" },
+];
 
 export default function Footer() {
   return (
@@ -87,13 +94,13 @@ export default function Footer() {
         <p>© {new Date().getFullYear()} Ysgol Bryn Alyn. All rights reserved.</p>
         <ul className="flex flex-wrap justify-center gap-4">
           {POLICY_LINKS.map((link) => (
-            <li key={link}>
+            <li key={link.label}>
               <a
-                href="#"
+                href={link.href}
                 className="transition hover:text-[var(--yba-gold,#F6B32E)]"
                 style={{ transitionDuration: "var(--transition-speed, .35s)" }}
               >
-                {link}
+                {link.label}
               </a>
             </li>
           ))}
