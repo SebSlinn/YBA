@@ -14,7 +14,7 @@ export default function NewsArticle({
     article,
 }: NewsArticleProps) {
     return (
-        <article className="mx-auto max-w-5xl px-6 pt-[82px] pb-12">
+        <article className="mx-auto max-w-5xl px-6 pt-[130px] pb-12">
 
             {article.featuredImage && (
                 <Image

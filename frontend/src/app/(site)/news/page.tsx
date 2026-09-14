@@ -1,4 +1,9 @@
 // frontend/src/app/(site)/news/page.tsx
+//
+// Your real file — only the <main> className changed, swapping py-22 for
+// pt-[130px] pb-22, so News gets the same top clearance from the 82px
+// fixed header as Blog now has. Everything else is exactly what you
+// pasted, unchanged.
 
 import { Metadata } from "next";
 import NewsCard from "@/components/news/NewsCard";
@@ -15,7 +20,7 @@ export default async function NewsPage() {
   const articles = await NewsService.getLatest();
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-22">
+    <main className="mx-auto max-w-7xl px-6 pt-[130px] pb-22">
 
       <h1 className="mb-8 text-4xl font-bold">
         School News
