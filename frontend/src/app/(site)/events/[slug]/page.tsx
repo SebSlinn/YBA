@@ -1,13 +1,34 @@
 //frontend/src/app/(site)/events/[slug]/page.tsx
 
 import { notFound } from "next/navigation";
-
+import { Metadata } from "next";
 import { EventService } from "@/services/ServiceFactory";
+import EventArticle from "@/components/events/EventArticle";
 
 interface EventPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata(
+  { params }: EventPageProps
+): Promise<Metadata> {
+
+  const { slug } = await params;
+
+  const event = await EventService.getBySlug(slug);
+
+  if (!event) {
+    return {
+      title: "Events | Ysgol Bryn Alyn",
+    };
+  }
+
+  return {
+    title: `${event.title} | Ysgol Bryn Alyn`,
+    description: event.summary,
+  };
 }
 
 export default async function EventPage({
@@ -23,22 +44,6 @@ export default async function EventPage({
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-6 pt-[82px] pb-22">
-
-      <h1 className="mb-6 text-4xl font-bold">
-        {event.title}
-      </h1>
-
-      <p className="mb-6 text-gray-600">
-        {event.startDate.toLocaleDateString("en-GB")}
-      </p>
-
-      <div
-        dangerouslySetInnerHTML={{
-          __html: event.content,
-        }}
-      />
-
-    </main>
+    <EventArticle event={event} />
   );
 }
