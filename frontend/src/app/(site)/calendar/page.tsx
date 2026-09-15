@@ -23,8 +23,8 @@ export default async function CalendarPage() {
   const events = await calendarService.getEvents();
 
   return (
-    <main className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
-      <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 16px' }}>
+    <main className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable} pt-[130px] pb-22`}>
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
         <SchoolCalendar events={events} schoolYear={SCHOOL_YEAR} />
       </div>
     </main>
