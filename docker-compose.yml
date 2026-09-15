@@ -41,6 +41,7 @@ services:
       - "3000:3000"
     environment:
       NODE_ENV: production
+      TERM_DATES_ICS_URL: ${TERM_DATES_ICS_URL}
     depends_on:
       - directus
 volumes:

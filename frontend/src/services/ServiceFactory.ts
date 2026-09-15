@@ -103,10 +103,14 @@ export function getCalendarService(): ICalendarService {
   // Optional: a published ICS feed (a school-managed O365 calendar, term
   // dates, whatever). Set the env var only once you have a feed URL —
   // omit it and the calendar just runs on Directus alone.
-  if (process.env.NEXT_PUBLIC_TERM_DATES_ICS_URL) {
+  // Deliberately NOT prefixed NEXT_PUBLIC_ — this URL is effectively a
+  // bearer token (anyone with it can read the school's calendar), and this
+  // service only ever runs server-side, so it should stay a server-only
+  // runtime env var rather than get baked into the public JS bundle.
+  if (process.env.TERM_DATES_ICS_URL) {
     sources.push(
       new IcsCalendarService({
-        url: process.env.NEXT_PUBLIC_TERM_DATES_ICS_URL,
+        url: process.env.TERM_DATES_ICS_URL,
         label: 'term-dates',
       })
     );
