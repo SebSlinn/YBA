@@ -45,6 +45,10 @@ import type { IQuickLinkService } from "@/services/interfaces/IQuickLinkService"
 import { DirectusQuickLinkService } from "@/services/directus/DirectusQuickLinkService";
 import { MockQuickLinkService } from "@/services/mock/MockQuickLinkService";
 
+import type { IFeaturedVideoService } from "@/services/interfaces/IFeaturedVideoService";
+import { DirectusFeaturedVideoService } from "@/services/directus/DirectusFeaturedVideoService";
+import { MockFeaturedVideoService } from "@/services/mock/MockFeaturedVideoService";
+
 // alongside your existing USE_MOCK_NEWS / USE_MOCK_EVENTS style flags
 const USE_MOCK_PAGES = process.env.NEXT_PUBLIC_USE_MOCK_PAGES === "true";
 const USE_MOCK_HERO = process.env.NEXT_PUBLIC_USE_MOCK_HERO === "true";
@@ -53,6 +57,7 @@ const USE_MOCK_DOCUMENTS = process.env.NEXT_PUBLIC_USE_MOCK_DOCUMENTS === "true"
 const USE_MOCK_BLOG = process.env.NEXT_PUBLIC_USE_MOCK_BLOG === "true";
 const USE_MOCK_ALUMNI = process.env.NEXT_PUBLIC_USE_MOCK_ALUMNI === "true";
 const USE_MOCK_QUICKLINKS = process.env.NEXT_PUBLIC_USE_MOCK_QUICKLINKS === "true";
+const USE_MOCK_FEATURED_VIDEOS = process.env.NEXT_PUBLIC_USE_MOCK_FEATURED_VIDEOS === "true";
 
 export function getPageService(): IPageService {
   return USE_MOCK_PAGES ? new MockPageService() : new DirectusPageService();
@@ -80,6 +85,10 @@ export function getAlumniService(): IAlumniService {
 
 export function getQuickLinkService(): IQuickLinkService {
   return USE_MOCK_QUICKLINKS ? new MockQuickLinkService() : new DirectusQuickLinkService();
+}
+
+export function getFeaturedVideoService(): IFeaturedVideoService {
+  return USE_MOCK_FEATURED_VIDEOS ? new MockFeaturedVideoService() : new DirectusFeaturedVideoService();
 }
 
 const useMock = false;

@@ -10,11 +10,16 @@
 // fresh) — anything added in Directus after the last `docker compose up
 // -d --build frontend` silently doesn't show up here until the next
 // rebuild. Matches app/(site)/layout.tsx's revalidate = 60.
+//
+// Featured Video section added directly below Quick Links, per design
+// direction — both are Directus-backed, all-navy sections now sitting
+// back to back on the homepage.
 
 import Header from "@/components/layout/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import NewsSection from "@/components/landing/NewsSection";
 import QuickLinks from "@/components/landing/QuickLinks";
+import FeaturedVideos from "@/components/landing/FeaturedVideos";
 import EventsSection from "@/components/landing/EventsSection";
 import Footer from "@/components/layout/Footer";
 import { getMenuService } from "@/services/ServiceFactory";
@@ -35,6 +40,10 @@ export default async function Home() {
 
         <section id="students">
           <QuickLinks />
+        </section>
+
+        <section id="featured-video">
+          <FeaturedVideos />
         </section>
 
         <section id="news">
