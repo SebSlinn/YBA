@@ -5,6 +5,10 @@
 // homepage), white "Featured Video" heading with a short YBA-gold
 // underline beneath it, up to two videos side by side on wider screens
 // and stacked on mobile.
+//
+// The bottom accent bar mirrors QuickLinks' own teal one — same 4px
+// absolutely-positioned bar, just gold here, marking the boundary with
+// the News section below.
 
 import { getFeaturedVideoService } from "@/services/ServiceFactory";
 import FeaturedVideoEmbed from "./FeaturedVideoEmbed";
@@ -16,7 +20,9 @@ export default async function FeaturedVideos() {
   if (playable.length === 0) return null;
 
   return (
-    <section className="bg-[var(--yba-navy,#2F3559)]">
+    <section className="relative overflow-hidden bg-[var(--yba-navy,#2F3559)]">
+      <div className="absolute bottom-0 left-0 h-[4px] w-full bg-[var(--yba-gold,#F6B32E)]" />
+
       <div className="mx-auto max-w-[var(--content-width,1400px)] px-6 py-14 sm:px-10 sm:py-16 md:px-[var(--page-padding,48px)]">
         <div className="mb-10 text-center sm:mb-12">
           <h2 className="text-2xl font-bold text-white sm:text-3xl">Featured Video</h2>
