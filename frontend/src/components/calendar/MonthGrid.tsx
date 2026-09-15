@@ -1,7 +1,7 @@
 'use client';
 
 import { CalendarEvent } from '@/types/calendar';
-import { categoryFor } from './calendarCategories';
+import { accentFor } from './calendarCategories';
 import styles from './MonthGrid.module.css';
 
 interface MonthGridProps {
@@ -82,12 +82,12 @@ export function MonthGrid({ month, events, selectedDate, onSelectDate }: MonthGr
 
             <span className={styles.chips}>
               {dayEvents.slice(0, MAX_VISIBLE).map((e) => {
-                const cat = categoryFor(e.category);
+                const cat = accentFor(e);
                 return (
                   <span
                     key={e.id}
-                    className={styles.chip}
-                    style={{ borderLeftColor: `var(${cat.colorVar})` }}
+                    className={[styles.chip, cat.solid ? styles.chipSolid : ''].join(' ')}
+                    style={cat.solid ? undefined : { borderLeftColor: `var(${cat.colorVar})` }}
                     title={e.title}
                   >
                     {e.title}

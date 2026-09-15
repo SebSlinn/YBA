@@ -37,7 +37,14 @@ export function SchoolCalendar({ events, schoolYear }: SchoolCalendarProps) {
   );
 
   const filteredEvents = useMemo(
-    () => events.filter((e) => activeCategories.has(categoryFor(e.category).key)),
+    () =>
+      events.filter(
+        // Site-authored (Directus) events are always shown — they aren't
+        // one of the filterable categories, they're always real content
+        // someone can click through to, so hiding them behind a filter
+        // toggle would just hide real pages from people looking for them.
+        (e) => e.source === 'directus' || activeCategories.has(categoryFor(e.category).key)
+      ),
     [events, activeCategories]
   );
 

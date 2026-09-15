@@ -93,6 +93,13 @@
   max-width: 100%;
 }
 
+.chipSolid {
+  border-left: none;
+  background: var(--yba-magenta);
+  color: var(--text-light, #ffffff);
+  font-weight: 600;
+}
+
 .moreChip {
   font-family: var(--cal-font-mono);
   font-size: 10px;

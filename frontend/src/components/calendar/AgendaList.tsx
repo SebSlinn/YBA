@@ -1,7 +1,7 @@
 'use client';
 
 import { CalendarEvent } from '@/types/calendar';
-import { categoryFor } from './calendarCategories';
+import { accentFor } from './calendarCategories';
 import styles from './AgendaList.module.css';
 
 interface AgendaListProps {
@@ -45,7 +45,7 @@ export function AgendaList({ events }: AgendaListProps) {
 
             <ul className={styles.eventList}>
               {dayEvents.map((e) => {
-                const cat = categoryFor(e.category);
+                const cat = accentFor(e);
                 const content = (
                   <>
                     <span className={styles.dot} style={{ background: `var(${cat.colorVar})` }} aria-hidden="true" />
