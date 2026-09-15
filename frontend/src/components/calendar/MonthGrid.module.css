@@ -81,9 +81,15 @@
   border-left: 3px solid var(--cal-ink-soft);
   background: var(--cal-paper);
   color: var(--cal-ink);
-  white-space: nowrap;
+  /* Wrap onto up to 2 lines instead of truncating to one — most event
+     titles fit in 2 lines, and the full title is still one tap/hover
+     away (the native title tooltip, or clicking the day for the full
+     agenda panel) for the few that don't. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-word;
   max-width: 100%;
 }
 

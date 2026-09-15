@@ -84,7 +84,12 @@ export function MonthGrid({ month, events, selectedDate, onSelectDate }: MonthGr
               {dayEvents.slice(0, MAX_VISIBLE).map((e) => {
                 const cat = categoryFor(e.category);
                 return (
-                  <span key={e.id} className={styles.chip} style={{ borderLeftColor: `var(${cat.colorVar})` }}>
+                  <span
+                    key={e.id}
+                    className={styles.chip}
+                    style={{ borderLeftColor: `var(${cat.colorVar})` }}
+                    title={e.title}
+                  >
                     {e.title}
                   </span>
                 );

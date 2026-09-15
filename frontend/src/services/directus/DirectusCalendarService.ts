@@ -41,7 +41,12 @@ export class DirectusCalendarService implements ICalendarService {
       endDate: e.endDate,
       allDay: false,
       location: e.location,
-      category: e.category,
+      // Deliberately not e.category — that's the Events collection's own
+      // free-text tagging field (a different purpose, e.g. "Sports",
+      // "Achievement"), not one of the calendar's term/exam/staff/general
+      // keys. Site-authored events always land in the general "School
+      // events" bucket on the calendar.
+      category: 'general',
       source: 'directus',
       url: `/events/${e.slug}`,
     };
