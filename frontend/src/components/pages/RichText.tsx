@@ -1,6 +1,31 @@
 // src/components/pages/RichText.tsx
 import DOMPurify from "isomorphic-dompurify";
 
+// Registered once at module load (not per-render) — DOMPurify hooks are
+// global, so adding one inside the component function would stack a new
+// duplicate hook on every re-render.
+//
+// iframe embeds can run arbitrary third-party JavaScript, so unlike
+// everything else in this sanitizer they're scoped to a fixed allow-list
+// of known video-platform hostnames rather than trusted purely because
+// staff authored the content. Anything else gets the iframe stripped
+// entirely rather than rendered with an untrusted src.
+const TRUSTED_IFRAME_HOSTS = ["player.vimeo.com"];
+
+DOMPurify.addHook("uponSanitizeElement", (node, data) => {
+  if (data.tagName !== "iframe") return;
+  const src = (node as HTMLIFrameElement).getAttribute?.("src") ?? "";
+  let hostname = "";
+  try {
+    hostname = new URL(src).hostname;
+  } catch {
+    // Not a valid absolute URL at all — definitely not trusted.
+  }
+  if (!TRUSTED_IFRAME_HOSTS.includes(hostname)) {
+    node.parentNode?.removeChild(node);
+  }
+});
+
 interface RichTextProps {
   /** Raw HTML from a Directus WYSIWYG field (e.g. Page.content). */
   html: string;
@@ -16,8 +41,12 @@ export function RichText({ html, className }: RichTextProps) {
       "a", "img",
       "blockquote", "code", "pre",
       "table", "thead", "tbody", "tr", "th", "td", "colgroup", "col",
+      "iframe",
     ],
-    ALLOWED_ATTR: ["href", "src", "alt", "title", "target", "rel", "style", "class", "colspan", "rowspan"],
+    ALLOWED_ATTR: [
+      "href", "src", "alt", "title", "target", "rel", "style", "class", "colspan", "rowspan",
+      "frameborder", "allow", "allowfullscreen", "width", "height",
+    ],
   });
 
 const richTextStyles = `
@@ -41,6 +70,7 @@ const richTextStyles = `
     [&_table]:w-full [&_table]:max-w-[950px] [&_table]:mx-auto [&_table]:my-6 [&_table]:border-collapse [&_table]:table-fixed
     [&_th]:bg-[#2F3559] [&_th]:text-white [&_th]:text-left [&_th]:p-3 [&_th]:border [&_th]:border-[#2F3559]
     [&_td]:p-[9px] [&_td]:border [&_td]:border-[#d5d7df]
+    [&_iframe]:w-full [&_iframe]:aspect-video [&_iframe]:mb-4 [&_iframe]:rounded-md
     after:content-[''] after:table after:clear-both
   `;
   return (
