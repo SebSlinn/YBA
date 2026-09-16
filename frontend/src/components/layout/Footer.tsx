@@ -37,13 +37,13 @@ const CONTACT_ITEMS = [
   },
 ];
 
-// Documents & Policies points at the real page; the other three are still
-// placeholders until those pages exist.
+// All five now point at their real pages.
 const POLICY_LINKS = [
-  { label: "Documents & Policies", href: "/documents" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Cookie Policy", href: "/cookie-policy" },
-  { label: "Accessibility", href: "#" },
+  { label: "All Documents", href: "/documents" },
+  { label: "About", href: "/about-this-site" },
+  { label: "Privacy", href: "/privacy-policy" },
+  { label: "Cookies", href: "/cookie-policy" },
+  { label: "Accessibility", href: "/accessibility-statement" },
 ];
 
 export default function Footer() {
@@ -52,15 +52,16 @@ export default function Footer() {
 
       <div className="mx-auto flex max-w-[var(--content-width,1400px)] flex-col gap-10 px-6 py-16 sm:px-10 md:flex-row md:items-start md:justify-between md:px-[var(--page-padding,48px)]">
 
-        <div>
+        <div className="flex flex-col items-center">
           <Image
             src="/images/logos/YBA_LOGO_TRANS.png"
             alt="YBA"
             width={120}
             height={120}
             className="h-16 w-auto"
+            style={{ aspectRatio: "auto" }}
           />
-          <p className="mt-4 text-sm font-semibold" style={{ color: "var(--yba-teal, #18B8C9)" }}>
+          <p className="mt-4 text-sm font-semibold leading-none" style={{ color: "var(--yba-teal, #18B8C9)" }}>
             Dream. Reach. Achieve
           </p>
         </div>
@@ -91,7 +92,13 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto flex max-w-[var(--content-width,1400px)] flex-col items-center gap-3 border-t border-white/10 px-6 py-6 text-xs text-white/60 sm:flex-row sm:justify-between sm:px-10 md:px-[var(--page-padding,48px)]">
-        <p>© {new Date().getFullYear()} Ysgol Bryn Alyn. All rights reserved.</p>
+        <a
+          href="/copyright_statement"
+          className="transition hover:text-[var(--yba-gold,#F6B32E)]"
+          style={{ transitionDuration: "var(--transition-speed, .35s)" }}
+        >
+          © {new Date().getFullYear()} Ysgol Bryn Alyn. All rights reserved.
+        </a>
         <ul className="flex flex-wrap justify-center gap-4">
           {POLICY_LINKS.map((link) => (
             <li key={link.label}>
