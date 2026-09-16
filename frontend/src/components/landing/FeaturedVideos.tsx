@@ -25,7 +25,7 @@ export default async function FeaturedVideos() {
 
       <div className="mx-auto max-w-[var(--content-width,1400px)] px-6 py-14 sm:px-10 sm:py-16 md:px-[var(--page-padding,48px)]">
         <div className="mb-10 text-center sm:mb-12">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">Welcome to YBA</h2>
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">Discover YBA</h2>
           <span className="mx-auto mt-3 block h-[4px] w-16 bg-[var(--yba-gold,#F6B32E)]" />
         </div>
 
