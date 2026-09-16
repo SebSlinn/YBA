@@ -1,4 +1,10 @@
 //src/components/landing/NewsSection.tsx
+//
+// Reverted back to the original white-background template — this is now
+// the reference pattern the other homepage sections are being unified
+// against: white section background, Featured News flush at the top with
+// no vertical gap, magenta accent bar along the bottom, "View all news"
+// button in teal.
 
 import FeaturedNews from "./FeaturedNews";
 import LatestNewsList from "./LatestNewsList";
@@ -18,7 +24,7 @@ export default async function NewsSection() {
   });
 
   return (
-    <section className="relative overflow-hidden bg-[var(--yba-navy,#2F3559)]">
+    <section className="relative overflow-hidden bg-[var(--yba-white,#E9EDF5)]">
 
       {/* Navy fade — same treatment as News/QuickLinks above it
       <div
@@ -37,12 +43,7 @@ export default async function NewsSection() {
 
         <div className="grid gap-10 lg:grid-cols-3">
 
-          {/* Flipped to white text now the section background is navy —
-              was `var(--yba-navy)`, which would disappear against navy.
-              NOTE: FeaturedNews.tsx itself wasn't part of this change — if
-              it sets its own text colours internally (rather than
-              inheriting this wrapper's colour), it needs the same flip. */}
-          <div className="lg:col-span-2" style={{ color: "var(--yba-white, #FFFFFF)" }}>
+          <div className="lg:col-span-2" style={{ color: "var(--yba-navy, #2F3559)" }}>
             <FeaturedNews articles={featured} />
           </div>
 
