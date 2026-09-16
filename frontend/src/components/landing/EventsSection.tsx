@@ -24,12 +24,14 @@ export default async function EventsSection() {
 
   return (
 
-    <section className="bg-white">
+    <section className="relative overflow-hidden bg-white">
+ {/* Magenta Bar — this section's accent colour, cycling back round from the hero */}
+      <div className="absolute bottom-0 left-0 h-[4px] w-full bg-[var(--yba-teal,#18B8C9)]" />
 
       <div className="mx-auto max-w-[var(--content-width,1400px)] px-[var(--page-padding,48px)]">
 
         <h2
-          className="pt-10 text-2xl font-bold sm:pt-12 sm:text-3xl"
+          className="pt-2 text-2xl font-bold  sm:text-3xl"
           style={{ color: "var(--yba-navy,#2F3559)" }}
         >
           Upcoming Events
