@@ -61,7 +61,7 @@ export default function Footer() {
             className="h-16 w-auto"
             style={{ aspectRatio: "auto" }}
           />
-          <p className="mt-4 text-sm font-semibold leading-none" style={{ color: "var(--yba-teal, #18B8C9)" }}>
+          <p className="mt-4 text-sm font-semibold leading-none" style={{ color: "white" }}>
             Dream. Reach. Achieve
           </p>
         </div>
