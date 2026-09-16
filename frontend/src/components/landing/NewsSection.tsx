@@ -24,7 +24,7 @@ export default async function NewsSection() {
   });
 
   return (
-    <section className="relative overflow-hidden bg-[var(--yba-white,#E9EDF5)]">
+    <section className="relative overflow-hidden bg-white">
 
       {/* Navy fade — same treatment as News/QuickLinks above it
       <div
