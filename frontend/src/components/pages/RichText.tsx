@@ -12,17 +12,56 @@ import DOMPurify from "isomorphic-dompurify";
 // entirely rather than rendered with an untrusted src.
 const TRUSTED_IFRAME_HOSTS = ["player.vimeo.com"];
 
+// Do Not Track is forced onto every trusted iframe here, unconditionally,
+// regardless of what staff pasted in Directus. This isn't staff-editable
+// by design — the point is nobody needs to remember to add it. With
+// dnt=1, Vimeo sets only its four essential/security cookies (bot
+// protection) and never its analytics cookie (vuid), so no cookie
+// consent banner is needed for embedded video at all: there's no
+// non-essential cookie being set in the first place to get consent for.
+const FORCED_PARAMS: Record<string, Record<string, string>> = {
+  "player.vimeo.com": { dnt: "1" },
+};
+
 DOMPurify.addHook("uponSanitizeElement", (node, data) => {
-  if (data.tagName !== "iframe") return;
-  const src = (node as HTMLIFrameElement).getAttribute?.("src") ?? "";
-  let hostname = "";
-  try {
-    hostname = new URL(src).hostname;
-  } catch {
-    // Not a valid absolute URL at all — definitely not trusted.
+  if (data.tagName === "iframe") {
+    const src = (node as HTMLIFrameElement).getAttribute?.("src") ?? "";
+
+    let url: URL | null = null;
+    try {
+      url = new URL(src);
+    } catch {
+      // Not a valid absolute URL at all — definitely not trusted.
+    }
+
+    if (!url || !TRUSTED_IFRAME_HOSTS.includes(url.hostname)) {
+      node.parentNode?.removeChild(node);
+      return;
+    }
+
+    const forced = FORCED_PARAMS[url.hostname];
+    if (forced) {
+      for (const [key, value] of Object.entries(forced)) {
+        url.searchParams.set(key, value);
+      }
+      (node as HTMLIFrameElement).setAttribute("src", url.toString());
+    }
+    return;
   }
-  if (!TRUSTED_IFRAME_HOSTS.includes(hostname)) {
-    node.parentNode?.removeChild(node);
+
+  // Same idea, for outbound links: any link staff set to open in a new
+  // tab (e.g. a Google Forms link) gets rel="noopener noreferrer" forced
+  // on regardless of whether they typed it — noreferrer stops the browser
+  // sending a Referer header at all to the destination site (so it can't
+  // even see which page, or which site, linked to it), and noopener is
+  // the standard guard against the new tab reaching back into this one
+  // via window.opener. This overwrites any partial or missing rel value
+  // rather than trusting staff got it right.
+  if (data.tagName === "a") {
+    const el = node as HTMLAnchorElement;
+    if (el.getAttribute?.("target") === "_blank") {
+      el.setAttribute("rel", "noopener noreferrer");
+    }
   }
 });
 

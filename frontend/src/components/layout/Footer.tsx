@@ -42,7 +42,7 @@ const CONTACT_ITEMS = [
 const POLICY_LINKS = [
   { label: "Documents & Policies", href: "/documents" },
   { label: "Privacy Policy", href: "#" },
-  { label: "Cookie Policy", href: "#" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
   { label: "Accessibility", href: "#" },
 ];
 
