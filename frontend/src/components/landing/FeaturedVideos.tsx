@@ -1,10 +1,10 @@
 //src/components/landing/FeaturedVideos.tsx
 //
 // Directus-backed (featured_videos collection) via IFeaturedVideoService.
-// All-navy section (same as QuickLinks, sits directly below it on the
-// homepage), white "Featured Video" heading with a short YBA-gold
-// underline beneath it, up to two videos side by side on wider screens
-// and stacked on mobile.
+// White section (flipped from the original all-navy version — sits
+// directly below QuickLinks on the homepage), YBA-navy "Discover YBA"
+// heading with a short YBA-gold underline beneath it, up to two videos
+// side by side on wider screens and stacked on mobile.
 //
 // The bottom accent bar mirrors QuickLinks' own teal one — same 4px
 // absolutely-positioned bar, just gold here, marking the boundary with
@@ -20,12 +20,12 @@ export default async function FeaturedVideos() {
   if (playable.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden bg-[var(--yba-navy,#2F3559)]">
+    <section className="relative overflow-hidden bg-white">
       <div className="absolute bottom-0 left-0 h-[4px] w-full bg-[var(--yba-gold,#F6B32E)]" />
 
       <div className="mx-auto max-w-[var(--content-width,1400px)] px-6 py-14 sm:px-10 sm:py-16 md:px-[var(--page-padding,48px)]">
         <div className="mb-10 text-center sm:mb-12">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">Discover YBA</h2>
+          <h2 className="text-2xl font-bold text-[var(--yba-navy,#2F3559)] sm:text-3xl">Discover YBA</h2>
           <span className="mx-auto mt-3 block h-[4px] w-16 bg-[var(--yba-gold,#F6B32E)]" />
         </div>
 
