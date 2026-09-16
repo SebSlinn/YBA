@@ -1,4 +1,9 @@
 // src/components/landing/LatestNewsList.tsx
+//
+// Colours flipped to sit on the News section's new navy background:
+// heading, title and hover state now white/light rather than the
+// original dark-on-light palette (which assumed a white/light section
+// background and would be unreadable on navy).
 
 import Link from "next/link";
 import Image from "next/image";
@@ -14,7 +19,7 @@ export default function LatestNewsList({
 
   return (
     <>
-      <h2 className="mb-6 text-2xl font-bold">
+      <h2 className="mb-6 text-2xl font-bold text-white">
         Latest News
       </h2>
 
@@ -41,7 +46,7 @@ export default function LatestNewsList({
                 rounded-lg
                 p-3
                 transition
-                hover:bg-gray-100
+                hover:bg-white/10
               "
             >
 
@@ -68,18 +73,19 @@ export default function LatestNewsList({
                 <h3 className="
                   font-semibold
                   leading-tight
-                  group-hover:text-blue-700
+                  text-white
+                  group-hover:text-[var(--yba-teal,#18B8C9)]
                 ">
                   {article.title}
                 </h3>
 
 
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-white/70">
                   {formattedDate}
                 </p>
 
 
-                <p className="mt-2 line-clamp-2 text-sm text-gray-600">
+                <p className="mt-2 line-clamp-2 text-sm text-white/70">
                   {article.summary}
                 </p>
 

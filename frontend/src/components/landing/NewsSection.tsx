@@ -18,9 +18,9 @@ export default async function NewsSection() {
   });
 
   return (
-    <section className="relative overflow-hidden bg-[var(--yba-white,#E9EDF5)]">
+    <section className="relative overflow-hidden bg-[var(--yba-navy,#2F3559)]">
 
-      {/* Navy fade — same treatment as News/QuickLinks above it 
+      {/* Navy fade — same treatment as News/QuickLinks above it
       <div
         className="absolute top-0 left-0 right-0"
         style={{
@@ -37,7 +37,12 @@ export default async function NewsSection() {
 
         <div className="grid gap-10 lg:grid-cols-3">
 
-          <div className="lg:col-span-2" style={{ color: "var(--yba-navy, #2F3559)" }}>
+          {/* Flipped to white text now the section background is navy —
+              was `var(--yba-navy)`, which would disappear against navy.
+              NOTE: FeaturedNews.tsx itself wasn't part of this change — if
+              it sets its own text colours internally (rather than
+              inheriting this wrapper's colour), it needs the same flip. */}
+          <div className="lg:col-span-2" style={{ color: "var(--yba-white, #FFFFFF)" }}>
             <FeaturedNews articles={featured} />
           </div>
 
