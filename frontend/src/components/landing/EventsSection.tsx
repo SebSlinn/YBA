@@ -3,6 +3,12 @@
 // Colours flipped to navy background / white writing, matching the same
 // treatment already applied to Quick Links, Featured Video and News.
 //
+// A 4px YBA-teal accent bar sits along the bottom edge, same mechanism as
+// the teal bar between Hero/Quick Links, the gold bar below Featured
+// Video, and the magenta bar below News — this is the last one before the
+// Footer, so it closes out the same colour-cycling pattern used all the
+// way down the homepage.
+//
 // NOTE: UpcomingEvents.tsx (the events list itself) wasn't part of this
 // change and renders inside this section below — if it sets its own text
 // colours internally rather than inheriting from a wrapper, it will need
@@ -21,7 +27,9 @@ export default async function EventsSection() {
 
   return (
 
-    <section className="bg-[var(--yba-navy,#2F3559)] py-16 sm:py-24">
+    <section className="relative overflow-hidden bg-[var(--yba-navy,#2F3559)] py-16 sm:py-24">
+
+      <div className="absolute bottom-0 left-0 h-[4px] w-full bg-[var(--yba-teal,#18B8C9)]" />
 
       <div className="relative mx-auto max-w-[var(--content-width,1400px)] px-[var(--page-padding,48px)]">
 
