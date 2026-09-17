@@ -81,7 +81,7 @@ export default function FlipbookViewer({
   if (totalPages === 0 || !bookSize) return null;
 
   return (
-    <section className="flex flex-col items-center gap-4 py-8">
+    <section className="flex flex-col items-center gap-4 pb-8">
       {title && (
         <h2 className="text-2xl font-bold text-[var(--yba-navy,#2F3559)]">
           {title}
@@ -112,6 +112,17 @@ export default function FlipbookViewer({
           flippingTime={700}
           onFlip={(e: { data: number }) => setCurrentPage(e.data)}
           className="flipbook-viewer"
+          style={{}}
+          startPage={0}
+          drawShadow
+          usePortrait
+          startZIndex={0}
+          autoSize={false}
+          swipeDistance={30}
+          showPageCorners
+          disableFlipByClick={false}
+          useMouseEvents
+          clickEventForward
         >
           {pageImages.map((src, i) => (
             <div key={src} className="bg-white flex items-center justify-center">
