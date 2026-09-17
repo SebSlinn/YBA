@@ -1,8 +1,7 @@
 // frontend/src/services/ServiceFactory.ts
 //
-// Your real file, with Blog and Alumni both merged in — Blog exactly as
-// delivered previously, Alumni added the same way. Everything else below
-// is exactly what you pasted originally, unchanged.
+// Your real file, with Flipbooks merged in the same way Blog/Alumni were —
+// everything else below is exactly what you pasted, unchanged.
 
 import { MockNewsService } from "./mock/MockNewsService";
 import { DirectusNewsService } from "./directus/DirectusNewsService";
@@ -49,6 +48,10 @@ import type { IFeaturedVideoService } from "@/services/interfaces/IFeaturedVideo
 import { DirectusFeaturedVideoService } from "@/services/directus/DirectusFeaturedVideoService";
 import { MockFeaturedVideoService } from "@/services/mock/MockFeaturedVideoService";
 
+import type { IFlipbookService } from "@/services/interfaces/IFlipbookService";
+import { DirectusFlipbookService } from "@/services/directus/DirectusFlipbookService";
+import { MockFlipbookService } from "@/services/mock/MockFlipbookService";
+
 // alongside your existing USE_MOCK_NEWS / USE_MOCK_EVENTS style flags
 const USE_MOCK_PAGES = process.env.NEXT_PUBLIC_USE_MOCK_PAGES === "true";
 const USE_MOCK_HERO = process.env.NEXT_PUBLIC_USE_MOCK_HERO === "true";
@@ -58,6 +61,7 @@ const USE_MOCK_BLOG = process.env.NEXT_PUBLIC_USE_MOCK_BLOG === "true";
 const USE_MOCK_ALUMNI = process.env.NEXT_PUBLIC_USE_MOCK_ALUMNI === "true";
 const USE_MOCK_QUICKLINKS = process.env.NEXT_PUBLIC_USE_MOCK_QUICKLINKS === "true";
 const USE_MOCK_FEATURED_VIDEOS = process.env.NEXT_PUBLIC_USE_MOCK_FEATURED_VIDEOS === "true";
+const USE_MOCK_FLIPBOOKS = process.env.NEXT_PUBLIC_USE_MOCK_FLIPBOOKS === "true";
 
 export function getPageService(): IPageService {
   return USE_MOCK_PAGES ? new MockPageService() : new DirectusPageService();
@@ -89,6 +93,10 @@ export function getQuickLinkService(): IQuickLinkService {
 
 export function getFeaturedVideoService(): IFeaturedVideoService {
   return USE_MOCK_FEATURED_VIDEOS ? new MockFeaturedVideoService() : new DirectusFeaturedVideoService();
+}
+
+export function getFlipbookService(): IFlipbookService {
+  return USE_MOCK_FLIPBOOKS ? new MockFlipbookService() : new DirectusFlipbookService();
 }
 
 const useMock = false;
