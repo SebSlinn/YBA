@@ -1,19 +1,19 @@
-//frontend/src/app/(site)/documents/[slug]/page.tsx
+//frontend/src/app/(site)/publications/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { getFlipbookService } from "@/services/ServiceFactory";
 import FlipbookArticle from "@/components/pages/FlipbookArticle";
 
-interface DocumentPageProps {
+interface PublicationPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: DocumentPageProps) {
+export async function generateMetadata({ params }: PublicationPageProps) {
   const { slug } = await params;
   const flipbookService = getFlipbookService();
   const document = await flipbookService.getBySlug(slug);
 
   if (!document) {
-    return { title: "Document not found | Ysgol Bryn Alyn" };
+    return { title: "Publication not found | Ysgol Bryn Alyn" };
   }
 
   return {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: DocumentPageProps) {
   };
 }
 
-export default async function DocumentPage({ params }: DocumentPageProps) {
+export default async function PublicationPage({ params }: PublicationPageProps) {
   const { slug } = await params;
   const flipbookService = getFlipbookService();
   const document = await flipbookService.getBySlug(slug);
