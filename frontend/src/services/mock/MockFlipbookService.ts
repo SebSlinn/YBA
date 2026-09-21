@@ -1,5 +1,8 @@
 //frontend/src/services/mock/MockFlipbookService.ts
-import type { IFlipbookService } from "../interfaces/IFlipbookService";
+import type {
+  IFlipbookService,
+  FlipbookQueryOptions,
+} from "../interfaces/IFlipbookService";
 import type { FlipbookDocument } from "@/domain/flipbook/FlipbookDocument";
 
 const MOCK_FLIPBOOKS: FlipbookDocument[] = [
@@ -7,6 +10,7 @@ const MOCK_FLIPBOOKS: FlipbookDocument[] = [
     id: "mock-1",
     title: "Prospectus 2023/24",
     slug: "prospectus",
+    category: "Prospectuses",
     pdfUrl: "/mock/prospectus.pdf",
     pageImageUrls: Array.from(
       { length: 6 },
@@ -17,11 +21,27 @@ const MOCK_FLIPBOOKS: FlipbookDocument[] = [
 ];
 
 export class MockFlipbookService implements IFlipbookService {
-  async getAll(): Promise<FlipbookDocument[]> {
-    return MOCK_FLIPBOOKS.filter((doc) => doc.status === "published");
+  async getAll(options?: FlipbookQueryOptions): Promise<FlipbookDocument[]> {
+    return MOCK_FLIPBOOKS.filter(
+      (doc) =>
+        doc.status === "published" &&
+        (!options?.category || doc.category === options.category)
+    );
   }
 
   async getBySlug(slug: string): Promise<FlipbookDocument | null> {
     return MOCK_FLIPBOOKS.find((doc) => doc.slug === slug) ?? null;
+  }
+
+  async getCategories(): Promise<string[]> {
+    const seen = new Set<string>();
+    const categories: string[] = [];
+    for (const doc of MOCK_FLIPBOOKS) {
+      if (doc.status === "published" && !seen.has(doc.category)) {
+        seen.add(doc.category);
+        categories.push(doc.category);
+      }
+    }
+    return categories;
   }
 }

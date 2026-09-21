@@ -17,6 +17,10 @@ export interface DirectusFlipbook {
   id: string;
   title: string;
   slug: string;
+  // Free-text grouping field, same convention as documents.category.
+  // Nullable because it's a new field on an existing collection — rows
+  // created before it existed will come back as null until edited.
+  category: string | null;
   pdf: string | null; // Directus file UUID, or null if not yet uploaded
   page_images: DirectusFlipbookPageImage[];
   status: "published" | "draft" | "archived";
