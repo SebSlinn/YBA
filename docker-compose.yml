@@ -28,6 +28,8 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "${SITE_URL}"
+    volumes:
+      - ./directus-uploads:/directus/uploads
     depends_on:
       - database
   frontend:
