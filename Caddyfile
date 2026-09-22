@@ -1,0 +1,7 @@
+ysgolbrynalyn.co.uk, www.ysgolbrynalyn.co.uk {
+	reverse_proxy frontend:3000
+}
+
+cms.ysgolbrynalyn.co.uk {
+	reverse_proxy directus:8055
+}

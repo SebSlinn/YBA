@@ -14,8 +14,6 @@ services:
   directus:
     image: directus/directus:latest
     restart: unless-stopped
-    ports:
-      - "8055:8055"
     environment:
       KEY: ${DIRECTUS_KEY}
       SECRET: ${DIRECTUS_SECRET}
@@ -27,6 +25,7 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      PUBLIC_URL: https://cms.ysgolbrynalyn.co.uk
       CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "${SITE_URL}"
     volumes:
       - ./directus-uploads:/directus/uploads
@@ -37,14 +36,27 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_DIRECTUS_URL: http://198.244.232.142:8055
+        NEXT_PUBLIC_DIRECTUS_URL: https://cms.ysgolbrynalyn.co.uk
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     environment:
       NODE_ENV: production
       TERM_DATES_ICS_URL: ${TERM_DATES_ICS_URL}
     depends_on:
       - directus
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - directus
 volumes:
   postgres_data:
+  caddy_data:
+  caddy_config:
