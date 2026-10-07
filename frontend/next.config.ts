@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         port: "8055",
         pathname: "/assets/**",
       },
+      { 
+        protocol: 'https', 
+        hostname: 'cms.ysgolbrynalyn.co.uk', 
+        pathname: '/assets/**' 
+      },
     ],
   },
   async headers() {
@@ -29,7 +34,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self' http://198.244.232.142:8055;",
+                        value: "frame-ancestors 'self' https://cms.ysgolbrynalyn.co.uk http://localhost:8055 http://198.244.232.142:8055;",
           },
         ],
       },
