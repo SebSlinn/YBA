@@ -14,6 +14,8 @@ services:
   directus:
     image: directus/directus:latest
     restart: unless-stopped
+    ports:
+      - "127.0.0.1:8055:8055"
     environment:
       KEY: ${DIRECTUS_KEY}
       SECRET: ${DIRECTUS_SECRET}
@@ -38,6 +40,8 @@ services:
       args:
         NEXT_PUBLIC_DIRECTUS_URL: https://cms.ysgolbrynalyn.co.uk
     restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
     environment:
       NODE_ENV: production
       TERM_DATES_ICS_URL: ${TERM_DATES_ICS_URL}
