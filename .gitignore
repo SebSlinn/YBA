@@ -8,3 +8,4 @@ frontend/.env.*
 docker-compose.yml.server-backup
 .gitignore.server-backup
 directus-uploads/
+Claude outputs/
