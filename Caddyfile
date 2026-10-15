@@ -1,3 +1,7 @@
+{
+	email familyslinn@gmail.com
+}
+
 ysgolbrynalyn.co.uk, www.ysgolbrynalyn.co.uk {
 	reverse_proxy frontend:3000
 }
