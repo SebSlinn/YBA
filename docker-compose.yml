@@ -12,7 +12,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
   directus:
-    image: directus/directus:latest
+    # Pinned to the exact image running on 15 Oct 2026 (was :latest).
+    # Only change this deliberately - see Claude outputs/05-admin.md section 6.4.
+    image: directus/directus@sha256:568861dc03396477d0829897936731d861a3aa8ca68516a1422d68b4d3752621
     restart: unless-stopped
     ports:
       - "127.0.0.1:8055:8055"
