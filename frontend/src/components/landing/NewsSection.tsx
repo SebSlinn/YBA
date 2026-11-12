@@ -20,7 +20,7 @@ export default async function NewsSection() {
 
   const latest = await NewsService.getLatest({
     featured: false,
-    limit: 5,
+    limit: 4,
   });
 
   return (
